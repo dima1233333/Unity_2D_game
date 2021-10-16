@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -19,13 +17,13 @@ public class PlayerControl : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator _animator;
     [SerializeField] private string _runAnimatorKey;
-    [SerializeField] private string _jumpAnimatorKey; 
+    [SerializeField] private string _jumpAnimatorKey;
 
     private float _direction;
     private Rigidbody2D _rd;
     private bool _Jump;
     private bool _crawl;
-  
+
     private void Start()
     {
         _rd = GetComponent<Rigidbody2D>();
@@ -36,12 +34,12 @@ public class PlayerControl : MonoBehaviour
         _direction = Input.GetAxis("Horizontal");
 
         _animator.SetFloat(_runAnimatorKey, Mathf.Abs(_direction));
-     
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _Jump = true;
-            
+
         }
         if (_direction > 0 && _spriteRenderer.flipX)
         {
@@ -63,9 +61,9 @@ public class PlayerControl : MonoBehaviour
         bool canStand = !Physics2D.OverlapCircle(_headChecker.position, _headCheckerRadius, _whatIsGroud);
 
         _headCollider.enabled = !_crawl && canStand;
-            
+
         if (_Jump && canJump)
-        { 
+        {
             _rd.AddForce(Vector2.up * _jumpForse);
             _Jump = false;
         }
@@ -84,5 +82,19 @@ public class PlayerControl : MonoBehaviour
         Debug.Log("Hp raised " + hpPoints);
     }
 
+    public void AddBronze(int bronzeCoin)
+    {
+        Debug.Log("Bronze " + bronzeCoin);
+    }
+
+    public void AddChestCoin(int chestcoin)
+    {
+        Debug.Log("Coin" + chestcoin);
+    }
+    public void AddSilver(int siverCoin)
+    {
+        Debug.Log("Coin " + siverCoin);
+    }
+
+
 }
- 
