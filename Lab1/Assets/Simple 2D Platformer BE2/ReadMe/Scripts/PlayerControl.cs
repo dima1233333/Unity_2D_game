@@ -95,6 +95,10 @@ public class PlayerControl : MonoBehaviour
     {
         Debug.Log("Coin " + siverCoin);
     }
+    public void AddGold(int goldCoin)
+    {
+        Debug.Log("Coin " + goldCoin);
+    }
 
 
 }
