@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
     private bool _Jump;
     private bool _crawl;
 
+    public int Coins { get; set; }
+
     private void Start()
     {
         _rd = GetComponent<Rigidbody2D>();

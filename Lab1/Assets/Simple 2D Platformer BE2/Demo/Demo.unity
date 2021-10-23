@@ -1309,10 +1309,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 615818780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed0539340f1f1c41b8dab86506f14a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d1b04127dc73d343b5e83aae6ea47a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeLever: {fileID: 21300000, guid: 59ade21be4be4f745bf94b277147a1f5, type: 3}
+  _activeSprite: {fileID: 21300000, guid: 59ade21be4be4f745bf94b277147a1f5, type: 3}
+  _chest: {fileID: 2137180409}
 --- !u!1 &663564629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4952,7 +4953,6 @@ GameObject:
   - component: {fileID: 2137180411}
   - component: {fileID: 2137180410}
   - component: {fileID: 2137180409}
-  - component: {fileID: 2137180413}
   m_Layer: 7
   m_Name: Chest
   m_TagString: Untagged
@@ -4969,10 +4969,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2137180408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d31c61a719057c4fbbf11efc8cd595d, type: 3}
+  m_Script: {fileID: 11500000, guid: 63040a97389cb7b4da45c6486eb068c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _openSprite: {fileID: 21300000, guid: c7193651d506bac45b537a27d37aa181, type: 3}
+  _coinsAmount: 40
+  _openedChest: {fileID: 21300000, guid: c7193651d506bac45b537a27d37aa181, type: 3}
 --- !u!61 &2137180410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5064,16 +5065,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2137180413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137180408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efbbf11dbd392764698cbaec019b5ba2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chestcoin: 50
