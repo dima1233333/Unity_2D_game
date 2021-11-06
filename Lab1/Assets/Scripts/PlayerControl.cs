@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,20 +15,36 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float _headCheckerRadius;
     [SerializeField] private Transform _headChecker;
 
-    [Header("Animation")]
-    [SerializeField] private Animator _animator;
+    [Header("Animation")] [SerializeField] private Animator _animator;
     [SerializeField] private string _runAnimatorKey;
     [SerializeField] private string _jumpAnimatorKey;
+
+    [SerializeField] private int _maxHP;
+
+
+    [Header("UI")] [SerializeField] private TMP_Text _coinsAmountText;
 
     private float _direction;
     private Rigidbody2D _rd;
     private bool _Jump;
     private bool _crawl;
 
-    public int Coins { get; set; }
+    private int _coinsAmount;
+
+    public int CoinsAmount
+    {
+        get => _coinsAmount;
+        set
+        {
+            _coinsAmount = value;
+            _coinsAmountText.text = value.ToString();
+        }
+    }
 
     private void Start()
     {
+        CoinsAmount = 0;
+        
         _rd = GetComponent<Rigidbody2D>();
     }
 
@@ -43,6 +60,7 @@ public class PlayerControl : MonoBehaviour
             _Jump = true;
 
         }
+
         if (_direction > 0 && _spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = false;
@@ -54,11 +72,9 @@ public class PlayerControl : MonoBehaviour
 
         _crawl = (Input.GetKey(KeyCode.C));
     }
-
     private void FixedUpdate()
     {
         _rd.velocity = new Vector2(_direction * _speed, _rd.velocity.y);
-
         bool canJump = Physics2D.OverlapCircle(_groundChecker.position, _groundCheckerRadius, _whatIsGroud);
         bool canStand = !Physics2D.OverlapCircle(_headChecker.position, _headCheckerRadius, _whatIsGroud);
 
@@ -104,3 +120,6 @@ public class PlayerControl : MonoBehaviour
 
 
 }
+
+
+  

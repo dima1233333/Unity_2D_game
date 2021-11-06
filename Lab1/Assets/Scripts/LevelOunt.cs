@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class LevelOunt : MonoBehaviour
 {
     [SerializeField] private int _coinsToNextLevel;
     [SerializeField] private int _levelTolaod;
@@ -13,15 +13,17 @@ public class NewBehaviourScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerControl player = other.GetComponent<PlayerControl>();
-        if (player != null && player.Coins > _coinsToNextLevel)
+        if (player != null && player.CoinsAmount >= _coinsToNextLevel)
         {
-            _spriteRenderer.sprite = _finichOutSprite;
-            SceneManager.LoadScena
-         
+            Debug.Log("Dors open");
+            Invoke(nameof(LoadNextScene), 1f);
+   
         }
 
     }
-
-
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(_levelTolaod); 
+    }
 
 }

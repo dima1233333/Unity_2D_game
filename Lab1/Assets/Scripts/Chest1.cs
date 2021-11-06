@@ -31,7 +31,7 @@ public class Chest1 : MonoBehaviour
         {
             _spriteRenderer.sprite = _openedChest;
             //_tryOpen = true;
-            player.Coins += _coinsAmount;
+            player.CoinsAmount += _coinsAmount;
             Debug.Log("Coins" + _coinsAmount);
         }
     }
