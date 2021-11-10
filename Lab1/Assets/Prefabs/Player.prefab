@@ -301,7 +301,9 @@ MonoBehaviour:
   _animator: {fileID: 7396532405876523812}
   _runAnimatorKey: Speed
   _jumpAnimatorKey: Jump
+  _maxHP: 100
   _coinsAmountText: {fileID: 7396532404553579042}
+  _hpBar: {fileID: 0}
 --- !u!70 &7396532405876523818
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

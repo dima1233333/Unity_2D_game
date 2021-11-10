@@ -1,5 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -22,12 +26,17 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private int _maxHP;
 
 
-    [Header("UI")] [SerializeField] private TMP_Text _coinsAmountText;
+    [Header("UI")] 
+    [SerializeField] private TMP_Text _coinsAmountText;
+
+    [SerializeField] private Slider _hpBar; 
+    
 
     private float _direction;
     private Rigidbody2D _rd;
     private bool _Jump;
     private bool _crawl;
+    private int _currentHp;
 
     private int _coinsAmount;
 
@@ -41,10 +50,26 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private int CurrentHP
+    {
+        get => _currentHp;
+        set
+        {
+            if (value > _maxHP)
+            {
+                value = _maxHP;
+
+            }
+            _currentHp = value;
+            _hpBar.value = value;
+        }
+    }
+
     private void Start()
     {
         CoinsAmount = 0;
-        
+        _hpBar.maxValue = _maxHP;
+        CurrentHP = _maxHP;
         _rd = GetComponent<Rigidbody2D>();
     }
 
@@ -95,9 +120,39 @@ public class PlayerControl : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(_headChecker.position, _headCheckerRadius);
     }
+
     public void AddHp(int hpPoints)
     {
-        Debug.Log("Hp raised " + hpPoints);
+        int missiHp = _maxHP - _currentHp;
+        int pointToAdd = missiHp > hpPoints ? hpPoints : missiHp;
+        StartCoroutine(RestorHp(pointToAdd));
+    }
+
+    private IEnumerator RestorHp(int pointToAdd)
+    {
+        
+        while (pointToAdd != 0)
+        {
+            pointToAdd--;
+            CurrentHP++;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        CurrentHP -= damage;
+        if (_currentHp <= 0)
+        {
+            Debug.Log("Died");
+            gameObject.SetActive(false);
+            Invoke(nameof(ReloadScene), 1f);
+        }
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void AddBronze(int bronzeCoin)
