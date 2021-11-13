@@ -37,6 +37,7 @@ public class PlayerControl : MonoBehaviour
     private bool _Jump;
     private bool _crawl;
     private int _currentHp;
+    private float _lastPushTime;
 
     private int _coinsAmount;
 
@@ -139,14 +140,22 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, float pushPower = 0, float enemyPostX = 0)
     {
+        
         CurrentHP -= damage;
         if (_currentHp <= 0)
         {
             Debug.Log("Died");
             gameObject.SetActive(false);
             Invoke(nameof(ReloadScene), 1f);
+        }
+
+        if (pushPower != 0)
+        {
+            _lastPushTime = Time.time;
+            int direction = transform.position.x > enemyPostX ? 1 : -1;
+            _rd.AddForce(new Vector2(direction * pushPower/2, pushPower));
         }
     }
 
